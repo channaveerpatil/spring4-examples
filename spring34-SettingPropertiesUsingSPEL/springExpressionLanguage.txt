@@ -1,0 +1,29 @@
+What is Spring Expression Language?
+
+	Useful for manipulation and quering object graph at runtime
+	
+	Built to work with Spring Framework
+
+	Can be used independently of Spring Framework
+
+	Functionality
+	
+	Working with literal expressions
+
+	Working with regular expressions
+
+	Working with Mathametical operators
+
+	Working with boolean operators
+
+	Working with relational operators
+
+	Invoking methods
+	
+	Access and set properties
+
+	Work with bean reference
+
+	Can be used XML and Annotation based configuration
+
+	

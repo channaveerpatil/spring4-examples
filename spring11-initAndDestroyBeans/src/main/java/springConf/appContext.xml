@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--  
+		Bean scope by default singleton to manage life cycle.
+		If it declare to scope="prototype" then spring doesn't manage life cycle and it doesn't call destroy method
+	-->
+	<bean id="fruit" class="fooddemo.Fruit"	scope="prototype" init-method="initMethod" destroy-method="destroyMethod">
+		
+		<property name="description" value="Hi I am Fruit"></property>
+	</bean>
+
+
+	 
+</beans>

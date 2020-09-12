@@ -1,0 +1,14 @@
+What is Java Based Configuration
+	
+	Most recent alternatice for configuration a SPring Application
+	(introduced in Spring 3.0)
+
+	No appContext.xml at all
+
+	appContext.xml is replaced with Java class files.
+
+
+	@Configuration
+
+
+	@Bean

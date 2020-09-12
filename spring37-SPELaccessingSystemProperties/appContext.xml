@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:component-scan base-package="com.demo"></context:component-scan>
+	
+	<bean id="winScript" class="com.demo.WinScript"></bean>
+	<bean id="unixScript" class="com.demo.UnixScript"></bean>
+	
+	<bean id="sl" class="com.demo.ScriptLoaderDemoClass">
+		<property name="osname" value="#{systemProperties['os.name'] }" />
+		<property name="script" value="#{systemProperties['os.name'] matches 'Windows 7' ? winScript : unixScript }"  />
+	</bean>
+
+	
+</beans>

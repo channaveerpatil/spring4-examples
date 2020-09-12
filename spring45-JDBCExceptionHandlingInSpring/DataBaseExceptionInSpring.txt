@@ -1,0 +1,17 @@
+Understanding Database Exception Handling in Spring
+
+	No need to handle database related exceptions
+
+	Spring translates exceptions into classes in it's own exception handling hierarchy
+
+	DataAccessException
+	
+		Ex: DeadlockLosedDataAccessException
+
+	Exceptions are runtime errors
+
+	@Repository
+
+	
+
+	

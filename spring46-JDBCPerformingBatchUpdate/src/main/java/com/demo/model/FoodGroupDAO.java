@@ -1,0 +1,183 @@
+/**
+ * 
+ */
+package com.demo.model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
+import com.mysql.jdbc.MysqlParameterMetadata;
+
+/**
+ * @author channaveer.p
+ *
+ */
+
+@Repository("foodGroupDAO")
+public class FoodGroupDAO {
+
+	NamedParameterJdbcTemplate myJdbcTemplate;
+	
+	@Autowired
+	public void setMyJdbcTemplate(DataSource ds) {
+		this.myJdbcTemplate = new NamedParameterJdbcTemplate(ds);
+	}
+
+	public List<FoodGroup> getFoodGroups(){
+		// Old way of queryinh : select * from foodgroups where name='fruits'"
+		
+		MapSqlParameterSource myMap = new MapSqlParameterSource();
+		myMap.addValue("groupName", "Meat");
+		
+		return myJdbcTemplate.query("select * from foodgroups where name=:groupName", myMap , new RowMapper<FoodGroup>(){
+
+			public FoodGroup mapRow(ResultSet rs, int rowNum) throws SQLException {
+				
+				FoodGroup fg = new FoodGroup();
+				fg.setId(rs.getInt("id"));
+				fg.setName(rs.getString("name"));
+				fg.setDescription(rs.getString("description"));
+				return fg;
+			}
+		});
+	 
+	}
+	 
+	public FoodGroup getFoodGoup(int id){
+		
+		MapSqlParameterSource myMap = new MapSqlParameterSource();
+		myMap.addValue("id", id);
+		
+		return myJdbcTemplate.queryForObject("select * from foodgroups where id = :id", myMap, new RowMapper<FoodGroup>(){
+			public FoodGroup mapRow(ResultSet rs, int rowNum) 
+					throws SQLException {
+				
+				FoodGroup fg = new FoodGroup();
+				fg.setId(rs.getInt("id"));
+				fg.setName(rs.getString("name"));
+				fg.setDescription(rs.getString("description"));
+				
+				return fg;
+			}
+		});
+	 
+	}
+
+	public Boolean addFoodGroup(String name, String description){
+		
+		Boolean response = false;
+		
+		MapSqlParameterSource myMap = new MapSqlParameterSource();
+		
+		myMap.addValue("name", name);
+		myMap.addValue("description", description);
+		
+		int noOfRoowsaffected = myJdbcTemplate.update("insert into foodgroups (name, description) values (:name, :description)", myMap );
+		
+		if(noOfRoowsaffected == 1){
+			System.out.println("One row added to group successfully!");
+			response = true;
+		}else{
+			System.out.println("There was a problem adding to table foodgroup");
+		}
+		
+		return response;
+	}
+
+	public Boolean create(FoodGroup fg){
+		Boolean response = false;
+		
+		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(fg);
+		
+		int noOfRoowsaffected = myJdbcTemplate.update("insert into foodgroups (name, description) values (:name, :description)", params );
+		
+		if(noOfRoowsaffected == 1){
+			System.out.println("One row added to group successfully!");
+			response = true;
+		}else{
+			System.out.println("There was a problem adding to table foodgroup");
+		}
+		
+		return response;
+	}
+
+	public Boolean update(FoodGroup fg){
+		Boolean response = false;
+		
+		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(fg);
+		
+		int noOfRoowsaffected = myJdbcTemplate.update("update foodgroups set name =:name, description = :description where id=:id", params );
+		
+		if(noOfRoowsaffected == 1){
+			System.out.println("One row added to group successfully!");
+			response = true;
+		}else{
+			System.out.println("There was a problem adding to table foodgroup");
+		}
+		
+		return response;
+	}
+
+	public Boolean delete(int id){
+		Boolean res = false;
+
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		
+		params.addValue("id", id);
+		
+		int noOfRoowsaffected = myJdbcTemplate.update("delete from foodgroups where id = :id", params);
+		
+		if(noOfRoowsaffected == 1){
+			System.out.println("One row deleted to food group successfully!");
+			res = true;
+		}else{
+			System.out.println("There was a problem deleting to table foodgroup");
+		}
+		
+		
+		
+		return res;
+		
+		
+	}
+
+	public int[] createFoodGroups(List<FoodGroup> groups){
+	
+//		ArrayList<MapSqlParameterSource> paramArrayList = new ArrayList<MapSqlParameterSource>();
+//		
+//		for (FoodGroup fg : groups) {
+//			
+//			MapSqlParameterSource tempParam = new MapSqlParameterSource();
+//			
+//			tempParam.addValue("name", fg.getName());
+//			tempParam.addValue("description", fg.getDescription());
+//			paramArrayList.add(tempParam);
+//		}
+//		
+//		SqlParameterSource[] batchParams = new MapSqlParameterSource[paramArrayList.size()];
+//		
+//		paramArrayList.toArray(batchParams);
+		
+		SqlParameterSource[] batchParams = SqlParameterSourceUtils.createBatch(groups.toArray());
+		
+		int [] noOfRowsAffectedArray = myJdbcTemplate.batchUpdate("insert into foodgroups (name, description) values (:name, :description)", batchParams);
+		
+		return noOfRowsAffectedArray;
+		
+	}
+}

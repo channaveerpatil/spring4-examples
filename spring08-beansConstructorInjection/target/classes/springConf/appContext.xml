@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="fruit" class="fooddemo.Fruit" />
+	<bean id="vegetable" class="fooddemo.Vegetable"/>
+	<bean id="dairy" class="fooddemo.Dairy"/>
+	<bean id="meat" class="fooddemo.Meat"/>
+	<bean id="grain" class="fooddemo.Grain"/>
+	   
+	<bean id="meal" class="fooddemo.Meal">
+		<constructor-arg name="f" ref="fruit"/>
+		<constructor-arg name="v" ref="vegetable"/>
+		<constructor-arg name="d" ref="dairy"/>
+		<constructor-arg name="m" ref="meat"/>
+		<constructor-arg name="g" ref="grain"/>
+	</bean> 
+	 
+	<bean id="vegWithName" class="fooddemo.Vegetable">
+		<property name="myName" value="BrocolleVeg"></property>
+	</bean>
+	
+	 <bean id="vegWithPNameSpace" class="fooddemo.Vegetable" p:myName="Squash"></bean>
+</beans>

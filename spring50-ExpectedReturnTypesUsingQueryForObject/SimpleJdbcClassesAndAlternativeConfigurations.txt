@@ -1,0 +1,18 @@
+SimpleJdbc Classes
+
+	Less configuration
+	
+	org.springframework.jdbc.core package
+
+	SimpleJdbcInsert
+
+		instantiate with a data source and table name
+
+		execute (params)
+
+	SimpleJdbcCall
+		
+		Instantiate with stored procedure name
+
+	
+	

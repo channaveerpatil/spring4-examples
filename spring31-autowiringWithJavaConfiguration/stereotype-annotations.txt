@@ -1,0 +1,22 @@
+Spring Stereotype Annotation
+
+	Markers for classes that fulfill a specific role within an application
+	
+	@Component, @Service, @Repository, @Controller
+
+	@Component
+		Generic way to represent any spring managed component
+	
+	@Service
+		
+		Stereotype for service layer of application
+	
+	@Repository
+		Stereotype for persistence layer of application
+
+	
+	@Controller
+		Stereotype for presentation layer of application (Spring MVC Apps)
+			
+
+	

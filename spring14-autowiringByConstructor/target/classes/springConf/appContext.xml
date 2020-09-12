@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="fruit" class="fooddemo.Fruit" />
+	<bean id="vegetable" class="fooddemo.Vegetable"/>
+	<bean id="dairy" class="fooddemo.Dairy"/>
+	<bean id="meat" class="fooddemo.Meat"/>
+	<bean id="grain" class="fooddemo.Grain"/>
+	 
+	<bean id="meal" class="fooddemo.Meal">
+		<constructor-arg index="0" ref="fruit"/>
+		<constructor-arg index="1" ref="dairy"/>
+		<constructor-arg index="2" ref="grain"/>
+		<constructor-arg index="3" ref="meat"/>
+		<constructor-arg index="4" ref="vegetable"/>
+	</bean> 
+	 
+	 <bean id="autowiredByConstructor" class="fooddemo.Meal" autowire="constructor"/>
+</beans>

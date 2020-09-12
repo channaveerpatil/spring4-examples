@@ -1,0 +1,60 @@
+<web-app id="WebApp_ID" version="2.4"
+   xmlns="http://java.sun.com/xml/ns/j2ee" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+   <display-name>Spring Security Demo App</display-name>
+
+
+	<!-- Selvlet Name and Mapping  -->
+	<!-- Step 1 -->	
+   <servlet>
+      <servlet-name>MySpringSecurityDemoApp</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <!-- Step 2 -->
+      <init-param>
+      	<param-name>contextConfigLocation</param-name>
+      	<param-value>/WEB-INF/config/myDemoApp-servletConfig.xml</param-value>
+      </init-param>
+      
+      <!-- <load-on-startup>1</load-on-startup> -->
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>MySpringSecurityDemoApp</servlet-name>
+      <url-pattern>/</url-pattern>
+   </servlet-mapping>
+   
+   <!-- End of Selvlet Name and Mapping  -->
+   
+   <!-- Spring Security Filter Name and Mapping  -->
+   <!-- Step 2 -->
+   <filter>
+   		<filter-name>springSecurityFilterChain</filter-name>
+   		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+   </filter>
+   
+   <filter-mapping>
+   		<filter-name>springSecurityFilterChain</filter-name>
+   		<url-pattern>/*</url-pattern>
+   </filter-mapping>
+   
+   <!-- End of Spring Security Filter Name and Mapping  -->
+
+   <!-- Step 3  -->
+   <listener>
+   		<listener-class>org.springframework.web.context.ContextLoaderListner</listener-class>
+   </listener>
+    
+   <context-param>
+   		<param-name>contextConfigLocation</param-name>
+   		<param-value>
+   					/WEB-INF/config/myDemoApp-servletConfig.xml
+   					/WEB-INF/config/myDemoApp-securityConfig.xml
+   		</param-value>
+   </context-param>  
+ 
+</web-app> 
+
+ 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byType">
+
+	<bean id="fruit" class="fooddemo.Fruit" />
+	<bean id="vegetable" class="fooddemo.Vegetable"/>
+	<bean id="dairy" class="fooddemo.Dairy"/>
+	<bean id="meat" class="fooddemo.Meat"/>
+	<bean id="grain" class="fooddemo.Grain" primary="true"/> 
+	<bean id="grain2" class="fooddemo.Grain"/>
+	
+	<bean id="meal" class="fooddemo.Meal">
+		<property name="fruit" ref="fruit"/>
+		<property name="vegetable" ref="vegetable"/>
+		<property name="dairy" ref="dairy"/>
+		<property name="meat" ref="meat"/>
+		<property name="grain" ref="grain"/>
+	</bean>
+	
+	<bean id="beanAutowire" class="fooddemo.Meal" />
+	
+</beans>

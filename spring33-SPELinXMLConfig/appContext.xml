@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+	<bean id="fruit" class="fooddemo.Fruit"> 
+		<property name="name" value="Granny Smith + Apple"></property>
+	</bean>
+ 	-->	
+
+	<!--
+	<bean id="fruit" class="fooddemo.Fruit"> 
+		<property name="name" value="#{'Granny Smith' + ' Apple'}"></property>
+	</bean> -->
+	
+	<!-- 
+	<bean id="fruit" class="fooddemo.Fruit"> 
+		<property name="name" value="#{demoDataSource.getAppleType() + ' Apple'}"></property>
+	</bean> 
+	-->
+
+	<bean id="fruit" class="fooddemo.Fruit"> 
+		<property name="name" value="#{T(fooddemo.DataSource).getAppleTypeStatic() + ' Apple'}"></property>
+		<property name="nutritionalRating" value="#{T(java.lang.Math).random() * 10}"></property>
+	</bean> 
+	
+	
+	 
+	
+	<bean id="demoDataSource" class="fooddemo.DataSource"/>
+	
+</beans>

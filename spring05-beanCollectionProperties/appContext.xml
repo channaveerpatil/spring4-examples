@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="fruit" class="fooddemo.Fruit" />
+	
+	<bean id="vegetable" class="fooddemo.Vegetable"/>
+	
+	<bean id="vegWithName" class="fooddemo.Vegetable">
+		<property name="myName" value="BrocolleVeg"></property>
+	</bean>
+	
+	<bean id="fruitWithListAndMap" class="fooddemo.Fruit">
+		<property name="fruitNameList">
+			<list>
+				<value>Apple</value>
+				<value>Mango</value>
+				<value>Banana</value>
+			</list>
+		</property>
+		<property name="fruitNameMap">
+			<map>
+				<entry key="apple" value="Red"></entry>
+				<entry key="Mango" value="Yellow"></entry>
+				<entry key="Banana" value="Yello"></entry>
+			</map>
+		</property>
+	</bean>
+</beans>

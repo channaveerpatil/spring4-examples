@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="fruit" class="fooddemo.Fruit" />
+	<bean id="vegetable" class="fooddemo.Vegetable"/>
+	<bean id="dairy" class="fooddemo.Dairy"/>
+	<bean id="meat" class="fooddemo.Meat"/>
+	<bean id="grain" class="fooddemo.Grain"/>
+	
+	<bean id="meal" class="fooddemo.Meal">
+		<property name="fruit" ref="fruit"/>
+		<property name="vegetable" ref="vegetable"/>
+		<property name="dairy" ref="dairy"/>
+		<property name="meat" ref="meat"/>
+		<property name="grain" ref="grain"/>
+	</bean>
+	
+	<bean id="mealOuterBean" class="fooddemo.Meal">
+		<property name="fruit">
+			<bean id="myAppleInnerBean" class="fooddemo.Apple">
+				<property name="name" value="Apple "></property>
+				<property name="description" value="I am an Apple. Initially I am green in color "></property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="vegWithName" class="fooddemo.Vegetable">
+		<property name="myName" value="BrocolleVeg"></property>
+	</bean>
+	
+	 <bean id="vegWithPNameSpace" class="fooddemo.Vegetable" p:myName="Squash"></bean>
+</beans>
